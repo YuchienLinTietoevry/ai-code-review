@@ -3,7 +3,7 @@
 
 ## Description
 
-Perform code review using various AI models from OpenAI, Anthropic, Google or Deepseek to analyze and provide feedback on your code. This GitHub Action helps improve the code quality by automatically reviewing pull requests, focusing on specified file extensions, and excluding specific paths.
+Perform code review using various AI models from OpenAI, Anthropic, Google, Deepseek or Qwen to analyze and provide feedback on your code. This GitHub Action helps improve the code quality by automatically reviewing pull requests, focusing on specified file extensions, and excluding specific paths.
 
 ## Usage Examples
 
@@ -113,6 +113,32 @@ jobs:
         deepseek_model: 'deepseek-chat'
 ```
 
+### Qwen Example
+
+```yaml
+name: AI Code Review with Qwen
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  ai_code_review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: AI Code Review
+      uses: AleksandrFurmenkovOfficial/ai-code-review@v0.8
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: ${{ github.repository_owner }}
+        repo: ${{ github.event.repository.name }}
+        pr_number: ${{ github.event.number }}
+        
+        ai_provider: 'qwen'
+        deepseek_api_key: ${{ secrets.DEEPSEEK_API_KEY }}
+        deepseek_model: 'qwen3-235b-a22b'
+```
+
 ### Advanced Configuration Example
 
 ```yaml
@@ -176,6 +202,9 @@ jobs:
 
 ***deepseek_model*** - Optional. The Deepseek model name (e.g., deepseek-chat). Default is 'deepseek-chat'.
 
+***qwen_api_key*** - Required if using Qwen provider. This key is necessary to access Qwen's API for code review purposes.
+
+***qwen_model*** - Optional. The Qwen model name (e.g., qwen3-235b-a22b). Default is 'qwen3-235b-a22b'.
 
 ***include_extensions*** - Optional. A comma-separated list of file extensions to include in the review (e.g., ".py,.js,.html"). If not specified, the action will consider all file types.
 
