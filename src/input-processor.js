@@ -4,6 +4,7 @@ const OpenAIAgent = require("./openai-agent.js");
 const AnthropicAgent = require("./anthropic-agent.js");
 const GoogleAgent = require("./google-agent.js");
 const DeepseekAgent = require("./deepseek-agent.js");
+const QwenAgent = require("./qwen-agent.js");
 
 const { AI_REVIEW_COMMENT_PREFIX, SUMMARY_SEPARATOR } = require('./constants');
 
@@ -221,6 +222,9 @@ class InputProcessor {
                 break;
             case 'deepseek':
                 aiAgent = new DeepseekAgent(this._apiKey, this._fileContentGetter, this._fileCommentator, this._model);
+                break;
+            case 'qwen':
+                aiAgent = new QwenAgent(this._apiKey, this._fileContentGetter, this._fileCommentator, this._model);
                 break;
             default:
                 throw new Error(`Unsupported AI provider: ${this._aiProvider}`);

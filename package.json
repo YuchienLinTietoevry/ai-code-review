@@ -1,7 +1,7 @@
 {
   "name": "ai-code-review",
-  "version": "0.8.0",
-  "description": "AI Code Review is a GitHub Action that integrates various AI models (OpenAI, Google, Anthropic, Deepseek) into your code review process, providing automated feedback on pull requests. Improve your code quality and streamline your development workflow with this powerful and customizable AI-driven code review tool.",
+  "version": "0.8.0-qwen-fork",
+  "description": "AI Code Review is a GitHub Action that integrates various AI models (OpenAI, Google, Anthropic, Deepseek and Qwen) into your code review process, providing automated feedback on pull requests. Improve your code quality and streamline your development workflow with this powerful and customizable AI-driven code review tool.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,7 +29,8 @@
     "gemini",
     "anthropic",
     "claude",
-    "deepseek"
+    "deepseek",
+    "qwen"
   ],
   "author": "Aleksandr Furmenkov",
   "license": "MIT",

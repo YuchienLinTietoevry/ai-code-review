@@ -25,7 +25,7 @@ inputs:
   anthropic_model:
     description: 'Anthropic model name (e.g., claude-3-7-sonnet-20250219)'
     required: false
-    default: 'claude-3-7-sonnet-latest'  
+    default: 'claude-3-7-sonnet-latest'
   google_api_key:
     description: 'Google AI API key (required if using Google provider)'
     required: false
@@ -40,6 +40,13 @@ inputs:
     description: 'Deepseek model name (e.g., deepseek-chat)'
     required: false
     default: 'deepseek-chat'
+  qwen_api_key:
+    description: 'Qwen API key (required if using Qwen provider)'
+    required: false
+  qwen_model:
+    description: 'Qwen model name (e.g., qwen3-235b-a22b)'
+    required: false
+    default: 'qwen3-235b-a22b'
   owner:
     description: 'Repository owner'
     required: true
