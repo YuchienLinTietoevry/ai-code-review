@@ -14,6 +14,7 @@ class InputProcessor {
         this._pullNumber = null;
         this._githubToken = null;
         this._aiProvider = null;
+        this._apiUrl = null;
         this._apiKey = null;
         this._model = null;
         this._failAction = true;
@@ -70,6 +71,7 @@ class InputProcessor {
         this._pullNumber = parseInt(core.getInput("pr_number", { required: true, trimWhitespace: true }), 10);
         this._githubToken = this._sanitizeInput(core.getInput("token", { required: true, trimWhitespace: true }));
         this._aiProvider = this._sanitizeInput(core.getInput("ai_provider", { required: true, trimWhitespace: true }));
+        this._apiUrl = this._sanitizeInput(core.getInput(`${this._aiProvider}_api_url`, { required: false, trimWhitespace: true }));
         this._apiKey = this._sanitizeInput(core.getInput(`${this._aiProvider}_api_key`, { required: true, trimWhitespace: true }));
         this._model = this._sanitizeInput(core.getInput(`${this._aiProvider}_model`, { required: true, trimWhitespace: true }));
         this._failAction = core.getInput("fail_action_if_review_failed", { required: false, trimWhitespace: true }).toLowerCase() === 'true';
@@ -221,6 +223,12 @@ class InputProcessor {
                 break;
             case 'deepseek':
                 aiAgent = new DeepseekAgent(this._apiKey, this._fileContentGetter, this._fileCommentator, this._model);
+                break;
+            case 'openai_compatible':
+                if (!this._apiUrl) {
+                    core.warn(`API URL is not provided for ${this._aiProvider}. Using default OpenAI API URL.`);
+                }
+                aiAgent = new OpenAIAgent(this._apiKey, this._fileContentGetter, this._fileCommentator, this._model, this._apiUrl);
                 break;
             default:
                 throw new Error(`Unsupported AI provider: ${this._aiProvider}`);

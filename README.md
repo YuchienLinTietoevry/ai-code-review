@@ -113,6 +113,33 @@ jobs:
         deepseek_model: 'deepseek-chat'
 ```
 
+### OpenAI compatible Provider Example
+
+```yaml
+name: AI Code Review with Deepseek
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  ai_code_review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: AI Code Review
+      uses: AleksandrFurmenkovOfficial/ai-code-review@v0.8
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: ${{ github.repository_owner }}
+        repo: ${{ github.event.repository.name }}
+        pr_number: ${{ github.event.number }}
+        
+        ai_provider: 'openai_compatible'
+        openai_compatible_api_key: ${{ secrets.OPENAI_COMPATIBLE_API_KEY }}
+        openai_compatible_api_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+        openai_compatible_model: 'qwen3-235b-a22b'
+```
+
 ### Advanced Configuration Example
 
 ```yaml
