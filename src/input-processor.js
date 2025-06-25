@@ -95,7 +95,7 @@ class InputProcessor {
         if (!this._aiProvider) throw new Error("AI provider is required.");
         if (!this._apiKey) throw new Error(`${this._aiProvider} API key is required.`);
         
-        const supportedProviders = ['openai', 'anthropic', 'google', 'deepseek'];
+        const supportedProviders = ['openai', 'anthropic', 'google', 'deepseek', 'openai_compatible'];
         if (!supportedProviders.includes(this._aiProvider)) {
             throw new Error(`Unsupported AI provider: ${this._aiProvider}. Supported providers: ${supportedProviders.join(', ')}`);
         }
